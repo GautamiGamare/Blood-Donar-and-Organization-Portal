@@ -1,0 +1,141 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Donar Registration</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script>
+    <script>
+        $(function() {
+            var stateOptions;
+            var cityOptions;
+            var areaOption;
+            $.getJSON('{% static 'package.json' %}', function (result) {
+                $.each(result, function (i) {
+                    stateOptions += "<option value='" + i + "'>"
+                        + i + "</option>";
+                })
+                $('#state').html(stateOptions);
+                $('#state').change(function (){
+                  $.getJSON('{% static 'package.json' %}',function (result){
+                      $.each(result,function (i,j){
+                          if(i == $('#state').val()){
+                              $.each(j,function (a,b){
+                                  cityOptions += "<option value='" + a + "'>"
+                                      + a + "</option>";
+                              })
+                              $('#city').html(cityOptions);
+                              $('#city').change(function (){
+                                  $.getJSON('{% static 'package.json' %}',function (result){
+                                      $.each(result,function (i,j){
+                                          if(i== $('#state').val()){
+                                              $.each(j,function (a,b){
+                                                  if(a == $('#city').val()){
+                                                      $.each(b,function (p,q){
+                                                          areaOption += "<option value='" + q + "'>"
+                                                             + q + "</option>";
+                                                      })
+                                                      $('#area').html(areaOption);
+                                                  }
+                                              })
+                                          }
+                                      })
+                                  })
+                              })
+                          }
+                      })
+                  })
+                })
+            });
+        });
+    </script>
+
+  </head>
+  <body>
+  <form enctype="multipart/form-data" method="post" action="{% url 'save_donar' %}" >
+      {% csrf_token %}
+<div class="container" style="margin-right:100px;margin-left: 100px">
+    <center><p style="color: white; font-size: 35px;background: red ">Donar Registration</p></center>
+  <div class="form-group">
+    <label for="name">Enter Full Name</label>
+    <input type="text" class="form-control" id="name" placeholder="Enter Full Name" name="name">
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="contact1">Contact Number</label>
+      <input type="number" class="form-control" id="contact1" name="c1">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="contact2">Alternate Contact Number</label>
+      <input type="number" class="form-control" id="contact2" name="c2">
+    </div>
+  </div>
+
+    <div class="form-group">
+      <label for="bgroup">Select Blood Group</label>
+    <select class="form-control" id="bgroup" name="bg">
+      <option>A+</option>
+      <option>B+</option>
+      <option>O+</option>
+      <option>AB+</option>
+      <option>A-</option>
+      <option>B-</option>
+      <option>O-</option>
+      <option>AB-</option>
+    </select>
+    </div>
+
+    <div class="form-group">
+      <input name="date" type="date" class="form-control" placeholder="Select Last Blood Donation Date">
+    </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="state">State</label>
+      <select id="state" class="form-control" name="state">
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="city">City</label>
+      <select id="city" class="form-control" name="city">
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="area">Area</label>
+      <select id="area" class="form-control" name="area">
+      </select>
+    </div>
+  </div>
+
+   <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Email</label>
+      <input type="email" class="form-control" id="inputEmail4" name="email">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Password</label>
+      <input type="password" class="form-control" id="inputPassword4" name="pass">
+    </div>
+  </div>
+
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="customFile" name="photo">
+        <label class="custom-file-label" for="customFile">Upload Photo</label>
+    </div>
+    <div class="form-group" style="padding-top: 30px;padding-left: 50%" >
+  <button type="submit" class="btn btn-success btn-lg">Sign in</button>
+     </div>
+</div>
+</form>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>

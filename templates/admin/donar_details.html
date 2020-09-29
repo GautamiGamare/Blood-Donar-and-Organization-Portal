@@ -1,0 +1,56 @@
+{% extends 'admin/welcome_admin.html' %}
+{% block admin_block %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Donar Details</title>
+  </head>
+  <body>
+  <div class="container">
+  <h3 style="padding-left: 50%">Donar Details</h3>
+      <table class="table">
+          <tr>
+              <th>Donar ID</th>
+              <th>Name</th>
+              <th>Contact Number 1</th>
+              <th>Contact Number 2</th>
+              <th>Email</th>
+              <th>Blood Group</th>
+              <th>Last Donation Date</th>
+              <th>State</th>
+              <th>City</th>
+              <th>Area</th>
+              <th>Photo</th>
+          </tr>
+          {% for x in data %}
+              <tr>
+              <td>{{ x.id }}</td>
+              <td>{{ x.name }}</td>
+              <td>{{ x.contact_number }}</td>
+              <td>{{ x.contact_number_2 }}</td>
+              <td>{{ x.email }}</td>
+              <td>{{ x.blood_group }}</td>
+              <td>{{ x.last_donation_date }}</td>
+              <td>{{ x.state }}</td>
+              <td>{{ x.city }}</td>
+              <td>{{ x.area }}</td>
+              <td><img src="{{ x.photo.url }}" width="200px" height="200px" alt="Not available"></td>
+              </tr>
+          {% endfor %}
+      </table>
+  </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>
+{% endblock %}
