@@ -6,7 +6,7 @@ class OrganizationModel(models.Model):
     type = models.CharField(max_length=20)
     contact_number = models.IntegerField()
     contact_number_2 = models.IntegerField()
-    email = models.EmailField(max_length=40)
+    email = models.EmailField(max_length=40,unique=True)
     state = models.CharField(max_length=20)
     city = models.CharField(max_length=20)
     area = models.CharField(max_length=20)

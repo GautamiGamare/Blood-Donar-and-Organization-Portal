@@ -1,0 +1,52 @@
+{% extends 'admin/admin_wlcm.html' %}
+{% block admin_block %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  </head>
+  <body>
+  {% if message %}
+ <h3 style="color: #f8b739;font-size: 25px">{{ message }}</h3>
+ {% else %}
+ <div class="container-fluid">
+ <form method="post" action="{% url 'save_donar_msg' %}">
+ {% csrf_token %}
+     <table class="table">
+        {% for x in data %}
+        <tr style="background: #212529;color: #f8b739;font-size: 20px">
+            <th>Name : {{ x.name }}</th>
+        </tr>
+      <tr style="margin-top: 25px">
+          <td>
+          <div class="form-group">
+                <textarea class="form-control" name="msg" rows="4" id="msg" placeholder="Type msg here.." style="font-weight: bold"></textarea>
+          </div>
+          </td>
+      </tr>
+            <input type="number" value="{{ x.id }}" name="id" hidden>
+            <input type="text" value="{{ x.email }}" name="uname" hidden>
+            <input type="text" value="{{ x.name }}" name="name" hidden>
+      <tr>
+          <td>
+              <button type="submit" class="btn btn-block" style="background: #f8b739;color: #212529;font-size: 20px; font-weight: bold">Send</button>
+          </td>
+      </tr>
+      {% endfor %}
+  </table>
+ </form>
+</div>
+{% endif %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>
+{% endblock %}

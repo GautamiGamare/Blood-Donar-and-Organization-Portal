@@ -1,0 +1,67 @@
+{% extends 'organization/organization_welcome.html' %}
+{% block admin_block %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        .btn2:hover{
+            color: #0b0b0b;
+        }
+    </style>
+  </head>
+  <body>
+ <div class="container-fluid">
+ <form method="post" action="{% url 'reply_message1' %}">
+         {% csrf_token %}
+     <table width="100%">
+        <tr style="background: #212529;color: #f8b739;font-size: 20px;">
+            <div class="form-group">
+                <th>Name : {{ chat.sender_name }}</th>
+            </div>
+        </tr>
+      <tr style="margin-top: 25px;">
+          <td>
+          <div class="form-group" style="padding-right: 50%; padding-top: 50px;">
+                <textarea readonly class="form-control" rows="2" id="msg" style="font-weight: bold">{{ chat.message }}</textarea>
+          </div>
+          </td>
+      </tr>
+       <input type="text" hidden value="{{ chat.sender }}" name="receiver">
+       <input type="text" hidden value="{{ chat.sender_name }}" name="receiver_name">
+       <input type="text" hidden value="{{ chat.id }}" name="id">
+      <tr style="margin-top: 25px">
+          <td>
+          <div class="form-group" style="padding-left: 50%;">
+                <textarea class="form-control" name="msg" rows="2" id="msg" style="font-weight: bold" placeholder="Write your reply here.."></textarea>
+          </div>
+          </td>
+      </tr>
+      <tr>
+          <td>
+              <div class="row">
+                  <div class="col">
+                    <button type="submit" class="btn btn-block" style="background: #f8b739;color: #212529;font-size: 20px; font-weight: bold">Send</button>
+                  </div>
+
+                  <div class="col">
+                     <a href="{% url 'msg_read1' %}?no={{ chat.id }}" class="btn btn-primary btn-block btn2"  style="background: #212529;color: #f8b739;font-size: 20px; font-weight: bold;" >Make it Read</a>
+                  </div>
+              </div>
+
+          </td>
+      </tr>
+  </table>
+</form>
+</div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>
+{% endblock %}

@@ -389,7 +389,7 @@ button:focus{
 }
 
 .navbar-toggler{
-	border: 1px solid #57cef8 ;
+		border: 1px solid #57cef8 ;
 	border-radius: 0;
 	margin: 16px 15px;
 	padding: 10px 10px;

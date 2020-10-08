@@ -1,0 +1,114 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <title>Search Details</title>
+     <link rel="stylesheet" href="{% static 'style/mystyle.css' %}">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script>
+
+    <script>
+        $(function() {
+            var stateOptions;
+            var cityOptions;
+            var areaOption;
+            $.getJSON('{% static 'package.json' %}', function (result) {
+                $.each(result, function (i) {
+                    stateOptions += "<option value='" + i + "'>"
+                        + i + "</option>";
+                })
+                $('#state').html(stateOptions);
+                $('#state').change(function (){
+                  $.getJSON('{% static 'package.json' %}',function (result){
+                      $.each(result,function (i,j){
+                          if(i == $('#state').val()){
+                              $.each(j,function (a,b){
+                                  cityOptions += "<option value='" + a + "'>"
+                                      + a + "</option>";
+                              })
+                              $('#city').html(cityOptions);
+                          }
+                      })
+                  })
+                })
+            });
+        });
+    </script>
+
+  </head>
+  <body>
+  <div class="container">
+    <nav class="nav1">
+      <span class="navbar-brand mb-0 h1">Welcome to Red-Ross -- Get Donar or Organization Details here</span>
+    </nav>
+  </div>
+  <div class="container-fluid">
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline" style="padding-left:30px" action="{% url 'result' %}" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col">
+                <div class="form-inline">
+                    <label for="selectOption">Donar Or Organization </label>
+                    <select class="form-control mr-sm-2" id="selectOption" name="option">
+                        <option>Donar</option>
+                        <option>Organization</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-inline">
+                <label for="bgroup">Select Blood Group</label>
+                    <select class="form-control" id="bgroup" name="bloodgroup">
+                        <option>A+</option>
+                        <option>B+</option>
+                        <option>O+</option>
+                        <option>AB+</option>
+                        <option>A-</option>
+                        <option>B-</option>
+                        <option>O-</option>
+                        <option>AB-</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-inline">
+                <label for="state">State </label>
+                <select id="state" class="form-control" name="state">
+                </select>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-inline">
+                    <label for="city">City </label>
+                    <select id="city" class="form-control" name="city">
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <button class="btn btn1 btn-block" type="submit">Search</button>
+              </div>
+        </div>
+        </form>
+        <a href="{% url 'main' %}" class="btn btn1  ">Home</a>
+    </nav>
+  </div>
+
+  <div class="container" style="margin-top: 50px">
+      <div class="container">
+            {% block result %}
+            {% endblock %}
+      </div>
+
+  </div>
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>

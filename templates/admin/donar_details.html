@@ -1,4 +1,4 @@
-{% extends 'admin/welcome_admin.html' %}
+{% extends 'admin/admin_wlcm.html' %}
 {% block admin_block %}
 <!doctype html>
 <html lang="en">
@@ -14,7 +14,7 @@
   </head>
   <body>
   <div class="container">
-  <h3 style="padding-left: 50%">Donar Details</h3>
+  <h3 style="color:red; padding-left: 500px;padding-bottom: 20px">Donar Details</h3>
       <table class="table">
           <tr>
               <th>Donar ID</th>
@@ -29,7 +29,7 @@
               <th>Area</th>
               <th>Photo</th>
           </tr>
-          {% for x in data %}
+          {% for x in donar %}
               <tr>
               <td>{{ x.id }}</td>
               <td>{{ x.name }}</td>
@@ -41,11 +41,13 @@
               <td>{{ x.state }}</td>
               <td>{{ x.city }}</td>
               <td>{{ x.area }}</td>
-              <td><img src="{{ x.photo.url }}" width="200px" height="200px" alt="Not available"></td>
+              <td><img src="{{ x.photo.url }}" width="100px" height="100px" alt="Not available"></td>
               </tr>
           {% endfor %}
       </table>
   </div>
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

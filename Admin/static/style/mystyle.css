@@ -1,0 +1,19 @@
+.nav1{
+            font-family: 'Oswald', sans-serif;
+            background: #12557f;
+            color: #ffffff;
+            margin: auto;
+            text-align: center;
+            padding-top: 5px;
+            padding-bottom: 10px;
+        }
+
+        .btn1 {
+             border-color: #12557f;
+             color: #12557f;
+        }
+
+        .btn1:hover {
+             background: #12557f;
+             color: white;
+        }

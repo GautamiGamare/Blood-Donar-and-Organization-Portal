@@ -1,4 +1,4 @@
-{% extends 'admin/welcome_admin.html' %}
+{% extends 'admin/admin_wlcm.html' %}
 {% block admin_block %}
 <!doctype html>
 <html lang="en">
@@ -13,14 +13,14 @@
     <title>Organizations Details</title>
   </head>
   <body>
-  {% if data %}
+  {% if pend %}
   <div class="container-fluid">
-  <h3 style="padding-left: 500px; color: red;">Pending Donar Details </h3>
+  <h3 style="padding-left: 350px;padding-bottom: 20px; color: red;">Pending Organization Details </h3>
   {% if msg %}
   <h4 style="color: red; padding-top: 50px; font-size: 20px;">{{ msg }}</h4>
   {% endif %}
       <table class="table">
-          <tr>
+          <thead>
               <th>ID</th>
               <th>Name</th>
               <th>Type</th>
@@ -33,8 +33,8 @@
               <th>Status</th>
               <th>Photo</th>
               <th>Give Access</th>
-          </tr>
-          {% for x in data %}
+          </thead>
+          {% for x in pend %}
               <tr>
               <td>{{ x.id }}</td>
               <td>{{ x.name }}</td>
@@ -56,7 +56,7 @@
   <hr style="border-top:3px dashed indianred;margin-top: 20px">
    {% endif %}
   <div class="container-fluid" style="margin-top: 50px">
-  <h3 style="padding-left: 500px;color: red;">Confirm Donar Details </h3>
+  <h3 style="padding-left: 350px;padding-bottom: 20px;color: red;">Confirm Organization Details </h3>
       <table class="table">
           <tr>
               <th>ID</th>

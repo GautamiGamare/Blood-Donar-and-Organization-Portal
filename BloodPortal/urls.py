@@ -1,8 +1,6 @@
 from django.urls import path,include
-from django.views.generic import TemplateView,View
 from django.conf.urls.static import static
 from BloodPortal import settings
-
 
 urlpatterns = [
     path('admin/',include("Admin.urls")),

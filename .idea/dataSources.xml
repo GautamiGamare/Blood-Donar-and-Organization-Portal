@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="db1" uuid="d6e57609-16d4-4d94-ac72-895f7174bebe">
+    <data-source source="LOCAL" name="db2" uuid="b85ad07b-5b0d-42a7-b686-6246bfa7117d">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:E:\REST API\Assignment5\BloodPortal\db1.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:sqlite:E:\REST API\Assignment5\Git-Blood-Portal\Blood-Donar-and-Organization-Portal\db2.sqlite3</jdbc-url>
       <libraries>
         <library>
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.31.1/sqlite-jdbc-3.31.1.jar</url>

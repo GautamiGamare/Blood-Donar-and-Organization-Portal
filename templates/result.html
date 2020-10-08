@@ -1,0 +1,38 @@
+{% extends 'search_details.html' %}
+{% block result %}
+
+{% if data %}
+        <table class="table">
+        <tr style="color: #12557f; font-size: 20px">
+            <th>Name</th>
+            <th>Contact Number</th>
+            <th>Alternate Contact Numeber</th>
+            <th>Email ID</th>
+            <th>City</th>
+            <th>Area</th>
+            <th>Photo</th>
+        </tr>
+        {% for x in data %}
+        <tr>
+            <td>{{ x.name }}
+                {% if x.type %}
+                ({{ x.type }})
+                {% endif %}
+            </td>
+            <td>{{ x.contact_number }}</td>
+            <td>{{ x.contact_number_2 }}</td>
+            <td>{{ x.email }}</td>
+            <td>{{ x.city }}</td>
+            <td>{{ x.area }}</td>
+            <td><img src="{{ x.photo.url }}" width="150" height="150"></td>
+        </tr>
+        {% endfor %}
+        </table>
+{% endif %}
+
+{% if msg %}
+    <h3 style="color: #12557f">{{ msg }}</h3>
+{% endif %}
+
+
+{% endblock %}

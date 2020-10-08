@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -34,11 +35,73 @@
         </ul>
         </div>
         </nav>
+
+    <div class="row">
+        <div class="col-md-3">
+
+    <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
+  <button class="w3-bar-item w3-button w3-large btn btn-danger"
+  onclick="w3_close()">Close &times</button>
+  <ul>
+      <li>
+          <a href="#" class="w3-bar-item w3-button">Non-User Messages</a>
+                {% for x in nonuser %}
+                <ul>
+                    <li><a href="#">{{ x.name }}</a></li>
+                </ul>
+                {% endfor %}
+      </li>
+      <li><a href="#" class="w3-bar-item w3-button">Link 2</a></li>
+      <li><a href="#" class="w3-bar-item w3-button">Link 3</a></li>
+  </ul>
+</div>
+</div>
+
+
+        <div class="col-md-9">
+            <div id="main">
+
+<div class="w3-teal">
+  <button id="openNav" class="w3-button w3-teal w3-xlarge btn btn-success" onclick="w3_open()">&#9776;</button>
+  <div class="w3-container">
+    <h3>Check Messages Here</h3>
+      <img src="{% static 'images/gallery-03.jpg' %}" alt="Car" style="width:80%">
+  </div>
+</div>
+
+        </div>
+    </div>
+
+
+
+
+
+<div class="w3-container">
+
+</div>
+
+</div>
+
+
+
         {% block admin_block %}
         {% endblock %}
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+function w3_open() {
+  document.getElementById("main").style.marginLeft = "20%";
+  document.getElementById("mySidebar").style.width = "20%";
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("openNav").style.display = 'none';
+}
+function w3_close() {
+  document.getElementById("main").style.marginLeft = "0%";
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("openNav").style.display = "inline-block";
+}
+</script>
+
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>

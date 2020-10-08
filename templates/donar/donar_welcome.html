@@ -1,10 +1,129 @@
-<!DOCTYPE html>
+{% load static %}
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-Welcome Donar
-</body>
+  <head>
+  	<title>Welcome Donar</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="{% static 'static/css/style.css' %}">
+  </head>
+  <body>
+
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="p-4 pt-5">
+		  		<a href="#" class="img logo rounded-circle mb-5" style="background-image: url({{ active_donar.photo.url }});"></a>
+                <a href="{% url 'view_profile' %}" style="padding-left: 40%;padding-bottom: 20%;">Profile</a>
+	        <ul class="list-unstyled components mb-5">
+	          <li class="active">
+
+                <a href="#adminmsg" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Check Admin Messages</a>
+	            <ul class="collapse list-unstyled" id="adminmsg">
+                {% if admin_msg %}
+                    {% for x in admin_msg %}
+                    <li>
+                    <a href="{% url 'show_msg' %}?no={{ x.id }}">{{ x.sender_name }}</a>
+                    </li>
+                    {% endfor %}
+                {% else %}
+                    <li>
+                        <p>No Message from admin</p>
+                    </li>
+                {% endif %}
+	            </ul>
+
+                <a href="#donarmsg" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Check Messages from Donar</a>
+	            <ul class="collapse list-unstyled" id="donarmsg">
+                {% if donar_msg %}
+                    {% for x in donar_msg %}
+                    <li>
+                    <a href="{% url 'show_msg' %}?no={{ x.id }}">{{ x.sender_name }}</a>
+                    </li>
+                    {% endfor %}
+                {% else %}
+                    <li>
+                        <p>No Message from Donars</p>
+                    </li>
+                {% endif %}
+	            </ul>
+
+                <a href="#Donar" data-toggle="collapse" class="dropdown-toggle">Send Message to other Donar</a>
+	            <ul class="collapse list-unstyled" id="Donar">
+                {% for x in donar %}
+                    <li>
+                    <a href="{% url 'msg_donar' %}?no={{ x.id }}">{{ x.name }}</a>
+                    </li>
+                    {% endfor %}
+	            </ul>
+
+                <a href="#admin" data-toggle="collapse" class="dropdown-toggle">Send Message to Admin</a>
+	            <ul class="collapse list-unstyled" id="admin">
+                {% for x in admin %}
+                    <li>
+                    <a href="{% url 'msg_admin' %}?no={{ x.id }}">Admin : {{ x.username }}</a>
+                    </li>
+                    {% endfor %}
+	            </ul>
+	          </li>
+	        </ul>
+
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+              <i class="fa fa-bars"></i>
+              <span class="sr-only">Toggle Menu</span>
+            </button>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+            <h3 style="padding-left: 20%;">Welcome Mr/Miss {{ active_donar.name }}</h3>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="nav navbar-nav ml-auto" style="font-size: 20px">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'donar_welcome' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'donar_logout' %}">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        <div class="container-fluid">
+        {% if messages %}
+              {% for x in messages %}
+                <h3 style="color: red; font-size: 25px;">{{ x }}</h3>
+                {% endfor %}
+        {% endif %}
+        </div>
+
+        <div class="container-fluid">
+        {% block admin_block %}
+            {% if admin_block %}
+            {% else %}
+            <img src="{% static 'images/blood3.jpg' %}" width="100%" height="500px">
+            {% endif %}
+        {% endblock %}
+        </div>
+
+      </div>
+		</div>
+
+    <script src="{% static 'static/js/jquery.min.js' %}"></script>
+    <script src="{% static 'static/js/popper.js' %}"></script>
+    <script src="{% static 'static/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'static/js/main.js' %}"></script>
+  </body>
 </html>

@@ -29,26 +29,23 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
 
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
 </head>
 <body id="home" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
 	<div class="main-top">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-6">
+				<div class="col-lg-4">
 					<div class="wel-nots">
 						<p>Welcome to RED-ROSS Blood Donar and Organization Portal!</p>
 					</div>
 				</div>
-				<div class="col-lg-6">
-					<div class="right-top">
+				<div class="col-lg-8">
+					<div class="right-top" style="margin-top: 20px">
 						<ul>
-							<li><a href="{% url 'donar_login' %}" class="btn">Donar Login</a></li>
-							<li><a href="{% url 'login_org' %}" class="btn">Organization Login</a></li>
+							<li style="margin-right:10px"><a href="{% url 'donar_login' %}" class="btn">Donar Login</a></li>
+							<li style="margin-right:10px"><a href="{% url 'login_org' %}" class="btn">Organization Login</a></li>
+                            <li style="margin-right:10px"><a href="{% url 'result' %}" class="btn">Search Details</a></li>
+
                         </ul>
 					</div>
 				</div>
@@ -80,7 +77,13 @@
         </nav>
 	</header>
 	<!-- End header -->
-	
+    <div class="container">
+        {% if msg %}
+           <h3 style="border:1px solid red;color: red;font-size: 30px; text-align: center;margin-top: 20px;margin-bottom: 20px;">{{ msg }}</h3>
+        {% endif %}
+    </div>
+
+
 	<!-- Start Banner -->
 	<div class="ulockd-home-slider">
 		<div class="container-fluid">
@@ -91,7 +94,7 @@
 							<div class="lbox-details">
 								<h1>Welcome to Blood Donar and Organization Portal</h1>
 								<h4>Click here to check your nearby donar and organization</h4>
-								<a href="#" class="btn">Search</a>
+								<a href="{% url 'search_details' %}" class="btn">Search</a>
 							</div>
 						</div>
 					</div>
@@ -177,8 +180,8 @@
                 <div class="row">
                 {% for x in donar %}
 				<div class="col-md-3 col-sm-6">
-					<div class="box-gallery" style="margin-left: 40px;margin-right: 30px; margin-top: 20px;">
-						<img src="{{ x.photo.url }}" alt="">
+					<div class="box-gallery" >
+						<img src="{{ x.photo.url }}">
 						<div class="box-content">	
 							<h3 class="title">{{ x.name }} from {{ x.city }} {{ x.state }}</h3>
 						</div>
@@ -206,8 +209,8 @@
                 {% for x in org %}
                 <div class="col">
                     <div class="our-team">
-                        <div class="pic">
-                            <img src="{{ x.photo.url }}" alt="">
+                        <div class="pic" >
+                            <img src="{{ x.photo.url }}" alt="" style="padding-left: 20%">
                         </div>
                         <div class="team-content">
                             <h3 class="title">{{ x.name }}</h3>
@@ -238,7 +241,8 @@
 				
 				<div class="col-lg-12 col-xs-12">
 				  <div class="contact-block">
-					<form id="contactForm">
+					<form method="post" action="{% url 'nonuser_msg' %}">
+                        {% csrf_token %}
 					  <div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
@@ -248,7 +252,7 @@
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<input type="text" placeholder="Your Email" id="email" class="form-control" name="name" required data-error="Please enter your email">
+								<input type="text" placeholder="Your Email" id="email" class="form-control" name="email" required data-error="Please enter your email">
 								<div class="help-block with-errors"></div>
 							</div> 
 						</div>
@@ -260,13 +264,11 @@
 						</div>
 						<div class="col-md-12">
 							<div class="form-group"> 
-								<textarea class="form-control" id="message" placeholder="Your Message" rows="8" data-error="Write your message" required></textarea>
+								<textarea class="form-control" id="message" name="message" placeholder="Your Message" rows="8" data-error="Write your message" required></textarea>
 								<div class="help-block with-errors"></div>
 							</div>
 							<div class="submit-button text-center">
-								<button class="btn btn-common" id="submit" type="submit">Send Message</button>
-								<div id="msgSubmit" class="h3 text-center hidden"></div> 
-								<div class="clearfix"></div> 
+								<button class="btn btn-common" type="submit">Send Message</button>
 							</div>
 						</div>
 					  </div>            
@@ -293,8 +295,8 @@
 							</div>
 							<div class="media-body dit-right">
 								<h4>Email</h4>
-								<a href="#">demoinfo@gmail.com</a><br>
-								<a href="#">demoinfo@gmail.com</a>
+								<a href="#">redross@gmail.com</a><br>
+								<a href="#">redross@gmail.com</a>
 							</div>
 						</div>
 						<div class="media cont-line">
@@ -303,8 +305,8 @@
 							</div>
 							<div class="media-body dit-right">
 								<h4>Phone Number</h4>
-								<a href="#">12345 67890</a><br>
-								<a href="#">12345 67890</a>
+								<a href="#">67890 12345</a><br>
+								<a href="#">67890 12345</a>
 							</div>
 						</div>
 					</div>
@@ -347,5 +349,6 @@
 	<script src="{% static 'js/isotope.min.js' %}"></script>
 	<script src="{% static 'js/images-loded.min.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
+    </div>
 </body>
 </html>
