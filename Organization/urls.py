@@ -1,8 +1,9 @@
 from django.urls import path
 from Organization import views
+from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('login/',views.login,name="login_org"),
+    path('',TemplateView.as_view(template_name="organization/org_login.html"),name="login_org"),
     path('org_registration/',views.org_registration,name="org_registration"),
     path('save_org/',views.save_org,name="save_org"),
     path('validate_org/',views.validate_org,name="validate_org"),
@@ -11,5 +12,6 @@ urlpatterns = [
     path('reply_message1/',views.reply_message1,name="reply_message1"),
     path('msg_read1/',views.msg_read1,name="msg_read1"),
     path('send_msg_admin/',views.send_msg_admin,name="send_msg_admin"),
+    path('save_msg/',views.save_msg,name="save_msg"),
     path('org_logout/',views.org_logout,name="org_logout"),
 ]

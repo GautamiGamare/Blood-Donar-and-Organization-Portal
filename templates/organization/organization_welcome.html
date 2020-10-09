@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Admin Welcome</title>
+  	<title>Organization Welcome</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -16,17 +16,23 @@
 		<div class="wrapper d-flex align-items-stretch">
 			<nav id="sidebar">
 				<div class="p-4 pt-5">
-		  		<a href="#" class="img logo rounded-circle mb-5" style="background-image: url({% static 'images/gallery-03.jpg' %});"></a>
+		  		<a href="#" class="img logo rounded-circle mb-5" style="background-image: url({{ active.photo.url }});"></a>
 	        <ul class="list-unstyled components mb-5">
 	          <li class="active">
 
                 <a href="#donarmsg" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Check messages from admin</a>
 	            <ul class="collapse list-unstyled" id="donarmsg">
+                {% if admin_msg %}
                 {% for x in admin_msg %}
                     <li>
                     <a href="{% url 'check_admin_msg' %}?no={{ x.id }}">{{ x.sender_name }}</a>
                     </li>
                     {% endfor %}
+                {% else %}
+                    <li>
+                        <p>No message from admin</p>
+                    </li>
+                {% endif %}
 	            </ul>
 
                 <a href="#admin" data-toggle="collapse" class="dropdown-toggle">Send Message to Admin</a>
@@ -56,7 +62,7 @@
             <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars"></i>
             </button>
-
+            <h3 style="padding-left: 20%">Welcome : {{ active.name }}</h3>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="nav navbar-nav ml-auto" style="font-size: 20px">
                 <li class="nav-item active">
@@ -70,15 +76,21 @@
           </div>
         </nav>
 
-        <div class="container-fluid">
-        {% block admin_block %}
-        {% endblock %}
+              <div class="container-fluid">
+              {% if messages %}
+              {% for x in messages %}
+                <h3 style="color: red; font-size: 25px;">{{ x }}</h3>
+              {% endfor %}
+              {% endif %}
         </div>
 
         <div class="container-fluid">
-              {% if msg %}
-                <h3 style="color: red; font-size: 25px;">{{ msg }}</h3>
-                {% endif %}
+        {% block admin_block %}
+        {% if admin_block %}
+        {% else %}
+        <img src="https://image.shutterstock.com/image-vector/donation-blood-bank-medical-staff-600w-1119893537.jpg" height="500px" width="900px">
+        {% endif %}
+        {% endblock %}
         </div>
 
       </div>

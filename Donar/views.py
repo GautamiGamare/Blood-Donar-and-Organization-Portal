@@ -62,10 +62,6 @@ def donar_welcome(request):
     else:
         return render(request, "donar/donar_welcome.html", {'donar': DonarModel.objects.all().exclude(id=id), 'admin': adminModel.objects.all(), 'active_donar': DonarModel.objects.get(id=id)})
 
-def view_profile(request):
-    pass
-    #return render(request,"donar/view_profile.html")
-
 def save_donar(request):
     nm = request.POST.get('name')
     cn1 = request.POST.get('c1')

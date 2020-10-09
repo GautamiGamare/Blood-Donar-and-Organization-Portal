@@ -45,7 +45,7 @@ def org_details(request):
     x = donar_msg(request)
     pending= OrganizationModel.objects.filter(status="Pending")
     confirm = OrganizationModel.objects.filter(status="Confirm")
-    return render(request, "admin/org_details.html",{'data':pending,'conf':confirm,
+    return render(request, "admin/org_details.html",{'pend':pending,'conf':confirm,
                                                      'donar':DonarModel.objects.all(),
                                                      'nonuser':Nonuser.objects.filter(status='Pending'),
                                                      'org':OrganizationModel.objects.all(),

@@ -5,7 +5,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('donar_login/',views.donar_login,name='donar_login'),
-    path('view_profile/',views.view_profile,name="view_profile"),
     path('donar_registration/',views.donar_registration,name='donar_registration'),
     path('donar_welcome/',views.donar_welcome,name="donar_welcome"),
     path('save_donar/',views.save_donar,name="save_donar"),

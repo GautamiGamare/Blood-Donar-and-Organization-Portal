@@ -180,11 +180,13 @@
                 <div class="row">
                 {% for x in donar %}
 				<div class="col-md-3 col-sm-6">
-					<div class="box-gallery" >
+					<div class="box-gallery"  style="margin-left: 60px;margin-top: 20px;margin-bottom: 20px;">
+                        <div class="container" >
 						<img src="{{ x.photo.url }}">
-						<div class="box-content">	
+						<div class="box-content" >
 							<h3 class="title">{{ x.name }} from {{ x.city }} {{ x.state }}</h3>
 						</div>
+                        </div>
 					</div>
 				</div>
                 {% endfor %}
